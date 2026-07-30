@@ -1,0 +1,48 @@
+    rango_precio VARCHAR(50) NOT NULL,
+    fecha_adquisicion DATE,
+    fecha_vencimiento DATE,
+    cantidad DOUBLE NOT NULL DEFAULT 0.0,
+    stock_minimo DOUBLE NOT NULL DEFAULT 0.0,
+    laboratorio_id BIGINT NOT NULL,
+    CONSTRAINT fk_consumibles_laboratorio FOREIGN KEY (laboratorio_id) 
+        REFERENCES laboratorios(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- 8. Tabla de Usos de Equipamiento
+CREATE TABLE IF NOT EXISTS usos_equipamiento (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    investigador_id BIGINT NOT NULL,
+    equipamiento_id BIGINT NOT NULL,
+    tipo_investigacion VARCHAR(100) NOT NULL,
+    actividad_nombre VARCHAR(150) NOT NULL,
+    horas_uso DOUBLE NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    observacion VARCHAR(255),
+    CONSTRAINT fk_usos_eq_investigador FOREIGN KEY (investigador_id) 
+        REFERENCES investigadores(investigador_id) ON DELETE RESTRICT,
+    CONSTRAINT fk_usos_eq_equipamiento FOREIGN KEY (equipamiento_id) 
+        REFERENCES equipamientos(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- 9. Tabla de Usos de Consumibles
+CREATE TABLE IF NOT EXISTS usos_consumible (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    investigador_id BIGINT NOT NULL,
+    consumible_id BIGINT NOT NULL,
+    tipo_investigacion VARCHAR(100) NOT NULL,
+    actividad_nombre VARCHAR(150) NOT NULL,
+    cantidad DOUBLE NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    observacion VARCHAR(255),
+    CONSTRAINT fk_usos_con_investigador FOREIGN KEY (investigador_id) 
+        REFERENCES investigadores(investigador_id) ON DELETE RESTRICT,
+    CONSTRAINT fk_usos_con_consumible FOREIGN KEY (consumible_id) 
+        REFERENCES consumibles(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- Índices físicos para optimización
+CREATE INDEX idx_personas_dni ON personas(dni);
+CREATE INDEX idx_personal_lab ON personal_laboratorio(laboratorio_id);
+CREATE INDEX idx_equip_lab ON equipamientos(laboratorio_id);
+CREATE INDEX idx_consum_lab ON consumibles(laboratorio_id);
+CREATE INDEX idx_usos_eq_equip ON usos_equipamiento(equipamiento_id);
+CREATE INDEX idx_usos_con_consum ON usos_consumible(consumible_id);

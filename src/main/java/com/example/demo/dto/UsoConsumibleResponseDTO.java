@@ -1,0 +1,18 @@
+package com.example.demo.dto;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public record UsoConsumibleResponseDTO(
+    Long id,
+    Long investigadorId,
+    String investigadorNombreCompleto,
+    Long consumibleId,
+    String consumibleNombre,
+    String tipoInvestigacion,
+    String actividadNombre,
+    Double cantidad,
+    LocalDate fecha,
+    LocalTime hora,
+    String observacion
+) {}

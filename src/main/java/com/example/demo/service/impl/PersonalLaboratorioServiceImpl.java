@@ -1,0 +1,98 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.dto.PersonalLaboratorioRequestDTO;
+import com.example.demo.dto.PersonalLaboratorioResponseDTO;
+import com.example.demo.entity.Laboratorio;
+import com.example.demo.entity.PersonalLaboratorio;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.mapper.PersonalLaboratorioMapper;
+import com.example.demo.repository.LaboratorioRepository;
+import com.example.demo.repository.PersonalLaboratorioRepository;
+import com.example.demo.service.PersonalLaboratorioService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class PersonalLaboratorioServiceImpl implements PersonalLaboratorioService {
+
+    private final PersonalLaboratorioRepository personalRepository;
+    private final LaboratorioRepository laboratorioRepository;
+    private final PersonalLaboratorioMapper personalMapper;
+
+    @Override
+    @Transactional
+    public PersonalLaboratorioResponseDTO registrarPersonal(PersonalLaboratorioRequestDTO request) {
+        PersonalLaboratorio personal = personalMapper.toEntity(request);
+        
+        if (request.laboratorioId() != null) {
+            Laboratorio lab = laboratorioRepository.findById(request.laboratorioId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Laboratorio no encontrado con id: " + request.laboratorioId()));
+            personal.setLaboratorio(lab);
+        }
+
+        if (personal.getPerfil() != null) {
+            personal.getPerfil().setPersonal(personal);
+        }
+
+        PersonalLaboratorio guardado = personalRepository.save(personal);
+        return personalMapper.toResponse(guardado);
+    }
+
+    @Override
+    @Transactional
+    public PersonalLaboratorioResponseDTO actualizarPersonal(Long id, PersonalLaboratorioRequestDTO request) {
+        PersonalLaboratorio personal = personalRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Personal no encontrado con id: " + id));
+
+        personalMapper.updateEntityFromRequest(request, personal);
+
+        if (request.laboratorioId() != null) {
+            Laboratorio lab = laboratorioRepository.findById(request.laboratorioId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Laboratorio no encontrado con id: " + request.laboratorioId()));
+            personal.setLaboratorio(lab);
+        } else {
+            personal.setLaboratorio(null);
+        }
+
+        if (personal.getPerfil() != null) {
+            personal.getPerfil().setPersonal(personal);
+        }
+
+        PersonalLaboratorio guardado = personalRepository.save(personal);
+        return personalMapper.toResponse(guardado);
+    }
+
+    @Override
+    public PersonalLaboratorioResponseDTO obtenerPorId(Long id) {
+        PersonalLaboratorio personal = personalRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Personal no encontrado con id: " + id));
+        return personalMapper.toResponse(personal);
+    }
+
+    @Override
+    public List<PersonalLaboratorioResponseDTO> obtenerTodos() {
+        return personalRepository.findAll().stream()
+                .map(personalMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonalLaboratorioResponseDTO> obtenerInvestigadoresRenacyt() {
+        return personalRepository.buscarInvestigadoresRenacytConPerfil().stream()
+                .map(personalMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void eliminarPersonal(Long id) {
+        PersonalLaboratorio personal = personalRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Personal no encontrado con id: " + id));
+        personalRepository.delete(personal);
+    }
+}

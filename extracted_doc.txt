@@ -1,0 +1,226 @@
+﻿NOMBRE DEL SOFTWARE:
+ 
+Gestión 
+de Laboratorios de Investigación
+ 
+U
+niversitarios
+E
+NTRADAS
+:
+Por el Administrador: Directa al software
+Lista de
+ responsables: 
+Jefe
+ de Laboratorio, Subjefe de Laboratorio
+, Técnico, Practicante
+Indicando:
+Campo para que agregue su foto
+Apellidos y Nombres
+DNI
+Número de resolución: 
+Cargo: 
+Jefe
+ de Laboratorio, Subjefe de Laboratorio
+, Técnico, Practicante
+Género: Masculino, Femenino
+Es Docente
+ 
+Renacyt
+: 
+Sí, No
+Es Docente Investigador UNT
+: 
+Sí, No
+Condición: Nombrado, Contratado
+, Practicante
+Categoría: Principal, Asociado, Auxiliar
+, No corresponde
+Datos generales del Laboratorio:
+Indicando:
+Facultad
+:
+ 
+Enumerar las 13 Facultades
+, 
+POSGRADO
+ 
+Escuelas o Programas de estudio: 
+Enumerar las escuelas por Facultad
+, 
+Posgrado
+Área de investigación de la Escuela: 
+ Enumerar las 6 áreas del CONCYTEC
+Líneas de investigación: 
+Enumerar las 50 Líneas UNT
+ (puede elegir más de una)
+Categoría: Consolidado, Por Consolidar, Emergente
+Número de resolución
+:  ADJUNTAR, + mas de un archivo en un año 
+Correo institucional del laboratorio
+: 
+Objetivo de Desarrollo Sostenible: 
+Enumerar los 17 ODS
+ (CAPACIDAD DE ELEGIR MÁS DE UNO)
+Posee un Sistema
+ de Gestión: 
+Sí, No
+Datos del equipamiento:
+ 
+TOO EL JEFE DE LABORATORIO
+HAY LABORATORIOS QUE TIENEN 10 equipos – 50 EQUIPOS
+Indicando por cada EQUIPO:
+Nombre del Equipo: 
+Función del equipo
+: 
+Precio promedio del equipo (en miles de soles)
+: 
+ 
+5-10, ]10-20], ]20-50],
+ 
+]50-100],
+ 
+]100-250], ]250-500], ]500-1000], mayores a 1000
+Año de adquisición: 
+Horas de uso hasta la fecha:
+ 
+Estado del equipo: 
+operativo, no operativo
+Programa de Mantenimiento
+: 
+anual, bienal, trienal
+, no corresponde
+, no considerado
+Programa de Mantenimiento por horas de uso: 
+_______
+anotar el número de horas, no corresponde
+Se cumple el programa de mantenimiento: 
+Sí, No, a veces
+Requiero un consumible para funcionar: 
+Sí, No
+Tipo
+ del consumible: gas, solvente, metal, otro
+_____
+ 
+DOCUMENTOS ADJUNTAR
+:  (
+opcional)
+Datos de los consumibles:
+ 
+TOO EL JEFE DE LABORATORIO
+Indicando por cada consumible:
+Nombre del consumible: 
+Marca:
+Empresa:
+ 
+Estado adquirido: líquido, sólido, gaseoso
+Tipo: plástico, reactivo, solvente, colorante, fijador, otro____
+Unidad de medida: gramos, unidades, mililitros, otro_____
+Función: 
+Precio promedio del equipo (en soles): 
+ 
+5-10, ]10-20], ]20-50],
+ 
+]50-100],
+ 
+]100-250], ]250-500], ]500-1000], mayores a 1000
+Fecha de adquisición: 
+Fecha de vencimiento:
+Cantidad que se tiene: 
+Stock mínimo
+:
+Por el 
+Usuario
+: 
+POR USUARIO Y CLAVE
+PUEDEN LLENAR 
+Jefe
+ de Laboratorio, Subjefe de Laboratorio, Técnico, Practicante
+Datos del USO del equipamiento:
+Indicando por cada EQUIPO:
+ 
+Nombre del Investigador:
+ 
+Género:
+Programa de Estudios al cual pertenece:
+ 
+ 
+ 
+inculuyendo
+ Posgrado
+Tipo de Investigación: 
+tesis de bachillerato, tesis de pregrado, tesis de maestría, tesis de especialidad, tesis doctoral, proyecto fondo concursable externo, proyecto CANON, PICFEDU, ensayo piloto, práctica investigativa para asignatura
+, otros___
+Nombre de la 
+Actividad
+: 
+Horas de uso:
+Fecha:
+Hora:
+ 
+Observación:
+ 
+Datos del USO de CONSUMIBLES: Frecuencia de llenado SEMANAL
+Indicando:
+Nombre del Investigador:
+Programa de estudios al cual pertenece:
+ incluyendo Posgrado
+Tipo de Investigación: 
+tesis de bachillerato, tesis de pregrado, tesis de maestría, tesis de especialidad, tesis doctoral, proyecto fondo concursable externo, proyecto CANON, PICFEDU, ensayo piloto, práctica investigativa para asignatura
+, otro___
+Nombre de la 
+Actividad: 
+Tipo de consumible: 
+reactivo, 
+colorante, solvente, fijador, 
+plástico, otro___
+Nombre del consumible:
+Cantidad (en gramos, unidades, mililitros, otro_____):
+Unidad de medida:
+Fecha:
+Hora:
+Observación:
+SALIDAS:
+Un panel (
+dashboard
+): con la LISTA DE RESPONSABLES, incluyendo fotos
+Un panel (
+dashboard
+): con los DATOS GENERALES DEL LABORATORIO incluyendo un desplegable de todo el equipamiento disponible y de la cantidad de los consumibles
+Semáforos que indiquen: la cercanía de cumplido el plazo para el siguiente mantenimiento: VERDE (falta más 6 meses o 300 horas), AMARILLO (falta 3 meses o 100 horas), ROJO (falta un mes o 30 horas)
+Semáforo que indique: 
+la necesidad de adquirir más reactivos, VERDE, AMARILLO, ROJO
+ (se debe asociar a la cantidad adquirida)
+Número 
+horas de uso 
+de los
+ equipo
+s
+Gráficos
+ 
+por cada equipo
+:
+Por 
+tipo de investigación
+Por 
+investigador
+Por género del investigador
+Por programa de estudios
+Gráficos del uso de los 
+equipos en conjunto
+:
+Por tipo de investigación
+Por investigador
+Por género del investigador
+Por programa de estudios
+Cantidad de uso de los consumibles
+Gráficos por cada consumible:
+Por tipo de investigación
+Por investigador
+Por género del investigador
+Por programa de estudios
+Gráficos del uso de los consumibles en conjunto:
+Por tipo de investigación
+Por investigador
+Por género del investigador
+Por programa de estudios
