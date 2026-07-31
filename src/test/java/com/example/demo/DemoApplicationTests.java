@@ -1,8 +1,8 @@
 package com.example.demo;
 
-import com.example.demo.dto.*;
-import com.example.demo.entity.*;
-import com.example.demo.service.*;
+import com.example.demo.business.api.dto.*;
+import com.example.demo.business.data.entity.*;
+import com.example.demo.business.domain.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -187,3 +187,4 @@ class DemoApplicationTests {
         assertEquals("VERDE", semaforoCon.get(0).estadoSemaforo());
     }
 }
+

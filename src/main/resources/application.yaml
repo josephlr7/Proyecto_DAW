@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: GestionDeLaboratorios
+
+  profiles:
+    default: dev
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+server:
+  port: 8080

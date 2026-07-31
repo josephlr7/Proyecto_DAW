@@ -137,6 +137,14 @@ CREATE TABLE IF NOT EXISTS usos_consumible (
         REFERENCES consumibles(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- 10. Tabla de Usuarios (Seguridad)
+CREATE TABLE IF NOT EXISTS usuarios (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol VARCHAR(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Índices físicos para optimización
 CREATE INDEX idx_personas_dni ON personas(dni);
 CREATE INDEX idx_personal_lab ON personal_laboratorio(laboratorio_id);
@@ -144,3 +152,4 @@ CREATE INDEX idx_equip_lab ON equipamientos(laboratorio_id);
 CREATE INDEX idx_consum_lab ON consumibles(laboratorio_id);
 CREATE INDEX idx_usos_eq_equip ON usos_equipamiento(equipamiento_id);
 CREATE INDEX idx_usos_con_consum ON usos_consumible(consumible_id);
+CREATE INDEX idx_usuarios_username ON usuarios(username);
