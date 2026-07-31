@@ -11,7 +11,8 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final String SECRET_KEY_BASE64 = "Y29sZWdpby1rcGktc2VjcmV0LWtleS0yNTYtYml0cy1taW5pbW8tY2FtYmlhci1lbi1wcm9kdWNjaW9u";
+    private final Key key = Keys.hmacShaKeyFor(io.jsonwebtoken.io.Decoders.BASE64.decode(SECRET_KEY_BASE64));
     private final long expirationMs = 86400000; // 24 horas
 
     public String generarToken(String username) {
