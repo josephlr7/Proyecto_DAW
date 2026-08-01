@@ -1,0 +1,254 @@
+========================================================================
+             GUIA DE PRUEBAS EN POSTMAN - GESTION DE LABORATORIOS
+========================================================================
+
+CONFIGURACION GENERAL EN POSTMAN:
+---------------------------------
+- Para las peticiones POST y PUT, configure en la pestaña Headers:
+  Key: Content-Type
+  Value: application/json
+  
+- Para las peticiones que requieren token, vaya a la pestaña Authorization:
+  Type: Bearer Token
+  Token: (Pegue el token JWT copiado en el Paso 2)
+
+========================================================================
+PASO 1: REGISTRAR UN NUEVO USUARIO (Publico)
+========================================================================
+METODO: POST
+URL: http://localhost:8080/api/auth/registro
+
+BODY (JSON):
+{
+  "username": "Pruebas",
+  "password": "password123",
+  "rol": "ADMIN"
+}
+
+========================================================================
+PASO 2: INICIAR SESION / LOGIN (Publico)
+========================================================================
+METODO: POST
+URL: http://localhost:8080/api/auth/login
+
+BODY (JSON):
+{
+  "username": "Pruebas",
+  "password": "password123"
+}
+
+* NOTA: Copie el token devuelto en la respuesta para usarlo en los siguientes pasos.
+
+========================================================================
+PASO 3: REGISTRAR UN LABORATORIO (Requiere Token)
+========================================================================
+METODO: POST
+URL: http://localhost:8080/api/laboratorios
+
+BODY (JSON):
+{
+  "facultad": "Ingenieria",
+  "escuela": "Sistemas e Informatica",
+  "areaInvestigacion": "Ingenieria y Tecnologia",
+  "lineasInvestigacion": "Inteligencia Artificial, Ciberseguridad",
+  "categoria": "Consolidado",
+  "resolucionNumero": "RESOL-UNT-2026",
+  "correoInstitucional": "lab.sistemas@unt.edu.pe",
+  "ods": "ODS 9",
+  "poseeSistemaGestion": true
+}
+
+========================================================================
+PASO 4: CRUD PERSONAL DE LABORATORIO (Requiere Token)
+========================================================================
+A. CREAR PERSONAL (POST)
+URL: http://localhost:8080/api/personal
+
+BODY (JSON):
+{
+  "nombres": "Juan Carlos",
+  "apellidos": "Perez Gomez",
+  "dni": "12345678",
+  "genero": "Masculino",
+  "resolucionNumero": "RESOL-PERS-001",
+  "cargo": "Jefe de Laboratorio",
+  "fotoUrl": "http://fotos.com/perez.jpg",
+  "esDocente": true,
+  "renacyt": true,
+  "esDocenteInvestigadorUNT": true,
+  "condicion": "Nombrado",
+  "categoria": "Principal",
+  "laboratorioId": 1,
+  "perfil": {
+    "fechaContratacion": "2026-01-15",
+    "biografia": "Ingeniero de Sistemas con doctorado en IA.",
+    "nroOficina": "Oficina 204"
+  }
+}
+
+B. ACTUALIZAR PERSONAL (PUT)
+URL: http://localhost:8080/api/personal/1
+
+BODY (JSON):
+{
+  "nombres": "Juan Carlos",
+  "apellidos": "Perez Gomez",
+  "dni": "12345678",
+  "genero": "Masculino",
+  "resolucionNumero": "RESOL-PERS-001",
+  "cargo": "Jefe de Laboratorio Senior",
+  "fotoUrl": "http://fotos.com/perez.jpg",
+  "esDocente": true,
+  "renacyt": true,
+  "esDocenteInvestigadorUNT": true,
+  "condicion": "Nombrado",
+  "categoria": "Principal",
+  "laboratorioId": 1,
+  "perfil": {
+    "fechaContratacion": "2026-01-15",
+    "biografia": "Ingeniero de Sistemas con doctorado en IA.",
+    "nroOficina": "Oficina 305"
+  }
+}
+
+========================================================================
+PASO 5: CRUD EQUIPAMIENTO (Requiere Token)
+========================================================================
+A. CREAR EQUIPO (POST)
+URL: http://localhost:8080/api/equipamiento
+
+BODY (JSON):
+{
+  "nombre": "Servidor GPU NVIDIA H100",
+  "funcion": "Computo cientifico de alto rendimiento",
+  "rangoPrecio": "]500-1000]",
+  "anoAdquisicion": 2026,
+  "horasUso": 0.0,
+  "estado": "operativo",
+  "programaMantenimiento": "anual",
+  "programaMantenimientoHoras": 1000,
+  "seCumpleMantenimiento": "Si",
+  "requiereConsumible": false,
+  "tipoConsumibleRequerido": null,
+  "laboratorioId": 1
+}
+
+B. ACTUALIZAR EQUIPO (PUT)
+URL: http://localhost:8080/api/equipamiento/1
+
+BODY (JSON):
+{
+  "nombre": "Servidor GPU NVIDIA H100",
+  "funcion": "Computo cientifico de alto rendimiento",
+  "rangoPrecio": "]500-1000]",
+  "anoAdquisicion": 2026,
+  "horasUso": 0.0,
+  "estado": "en mantenimiento",
+  "programaMantenimiento": "anual",
+  "programaMantenimientoHoras": 1000,
+  "seCumpleMantenimiento": "No",
+  "requiereConsumible": false,
+  "tipoConsumibleRequerido": null,
+  "laboratorioId": 1
+}
+
+========================================================================
+PASO 6: CRUD CONSUMIBLES (Requiere Token)
+========================================================================
+A. CREAR CONSUMIBLE (POST)
+URL: http://localhost:8080/api/consumibles
+
+BODY (JSON):
+{
+  "nombre": "Alcohol Isopropilico 99%",
+  "marca": "ContactClean",
+  "empresa": "LabSupplies S.A.",
+  "estadoAdquirido": "liquido",
+  "tipo": "solvente",
+  "unidadMedida": "mililitros",
+  "funcion": "Limpieza de circuitos opticos",
+  "rangoPrecio": "5-10",
+  "fechaAdquisicion": "2026-07-01",
+  "fechaVencimiento": "2028-07-01",
+  "cantidad": 1000.0,
+  "stockMinimo": 100.0,
+  "laboratorioId": 1
+}
+
+B. ACTUALIZAR CONSUMIBLE (PUT)
+URL: http://localhost:8080/api/consumibles/1
+
+BODY (JSON):
+{
+  "nombre": "Alcohol Isopropilico 99%",
+  "marca": "ContactClean",
+  "empresa": "LabSupplies S.A.",
+  "estadoAdquirido": "liquido",
+  "tipo": "solvente",
+  "unidadMedida": "mililitros",
+  "funcion": "Limpieza de circuitos opticos",
+  "rangoPrecio": "5-10",
+  "fechaAdquisicion": "2026-08-01",
+  "fechaVencimiento": "2028-08-01",
+  "cantidad": 1500.0,
+  "stockMinimo": 100.0,
+  "laboratorioId": 1
+}
+
+========================================================================
+PASO 7: REGISTRAR UN INVESTIGADOR (Requiere Token)
+========================================================================
+METODO: POST
+URL: http://localhost:8080/api/investigadores
+
+BODY (JSON):
+{
+  "nombres": "Ana Maria",
+  "apellidos": "Sanchez Ruiz",
+  "dni": "87654321",
+  "genero": "Femenino",
+  "programaEstudios": "Ingenieria de Sistemas",
+  "gradoAcademico": "Tesista de Pregrado"
+}
+
+========================================================================
+PASO 8: REGISTRO DE USOS (Requiere Token)
+========================================================================
+A. REGISTRAR USO DE EQUIPO (POST - Suma 150 horas de uso al equipo)
+URL: http://localhost:8080/api/usos/equipamiento
+
+BODY (JSON):
+{
+  "investigadorId": 2,
+  "equipamientoId": 1,
+  "tipoInvestigacion": "tesis de pregrado",
+  "actividadNombre": "Entrenamiento de red neuronal",
+  "horasUso": 150.0,
+  "fecha": "2026-08-01",
+  "hora": "10:00:00",
+  "observacion": "Entrenamiento del modelo completado"
+}
+
+B. REGISTRAR USO DE CONSUMIBLE (POST - Resta 250 ml al stock)
+URL: http://localhost:8080/api/usos/consumible
+
+BODY (JSON):
+{
+  "investigadorId": 2,
+  "consumibleId": 1,
+  "tipoInvestigacion": "tesis de pregrado",
+  "actividadNombre": "Limpieza de fibra optica",
+  "cantidad": 250.0,
+  "fecha": "2026-08-01",
+  "hora": "10:30:00",
+  "observacion": "Limpieza de conectores"
+}
+
+========================================================================
+PASO 9: REPORTES DE SEMAFOROS (Requiere Token)
+========================================================================
+A. OBTENER SEMAFORO DE EQUIPAMIENTOS (GET)
+URL: http://localhost:8080/api/equipamiento/laboratorio/1/semaforo
+
+B. OBTENER SEMAFORO DE CONSUMIBLES (GET)
+URL: http://localhost:8080/api/consumibles/laboratorio/1/semaforo
