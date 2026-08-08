@@ -108,7 +108,13 @@ public class ConsumibleServiceImpl implements ConsumibleService {
     public void eliminarConsumible(Long id) {
         Consumible c = consumibleRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Consumible no encontrado con id: " + id));
-        consumibleRepository.delete(c);
+        
+        if (!c.getUsos().isEmpty()) {
+            c.setActivo(false);
+            consumibleRepository.save(c);
+        } else {
+            consumibleRepository.delete(c);
+        }
     }
 
     private Consumible toEntity(ConsumibleDTO dto) {

@@ -7,5 +7,6 @@ public interface InvestigadorService {
     InvestigadorDTO registrarInvestigador(InvestigadorDTO dto);
     InvestigadorDTO obtenerPorId(Long id);
     List<InvestigadorDTO> obtenerTodos();
+    void eliminarInvestigador(Long id);
 }
 

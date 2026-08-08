@@ -110,7 +110,13 @@ public class EquipamientoServiceImpl implements EquipamientoService {
     public void eliminarEquipamiento(Long id) {
         Equipamiento e = equipamientoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Equipamiento no encontrado con id: " + id));
-        equipamientoRepository.delete(e);
+        
+        if (!e.getUsos().isEmpty()) {
+            e.setEstado("inactivo");
+            equipamientoRepository.save(e);
+        } else {
+            equipamientoRepository.delete(e);
+        }
     }
 
     private Equipamiento toEntity(EquipamientoDTO dto) {

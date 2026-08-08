@@ -47,6 +47,9 @@ public class Laboratorio {
     @Column(name = "posee_sistema_gestion", nullable = false)
     private Boolean poseeSistemaGestion = false;
 
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
+
     @OneToMany(mappedBy = "laboratorio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PersonalLaboratorio> personal = new ArrayList<>();
 

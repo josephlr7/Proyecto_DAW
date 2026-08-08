@@ -61,6 +61,9 @@ public class Consumible {
     @JoinColumn(name = "laboratorio_id", nullable = false)
     private Laboratorio laboratorio;
 
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
+
     @OneToMany(mappedBy = "consumible", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsoConsumible> usos = new ArrayList<>();
 }

@@ -76,5 +76,21 @@ public class LaboratorioServiceImpl implements LaboratorioService {
                 entity.getPoseeSistemaGestion()
         );
     }
+
+    @Override
+    @Transactional
+    public void eliminarLaboratorio(Long id) {
+        Laboratorio lab = laboratorioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Laboratorio no encontrado con id: " + id));
+
+        boolean tieneRelaciones = !lab.getPersonal().isEmpty() || !lab.getEquipamientos().isEmpty() || !lab.getConsumibles().isEmpty();
+
+        if (tieneRelaciones) {
+            lab.setActivo(false);
+            laboratorioRepository.save(lab);
+        } else {
+            laboratorioRepository.delete(lab);
+        }
+    }
 }
 

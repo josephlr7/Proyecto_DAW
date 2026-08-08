@@ -4,6 +4,8 @@ import com.example.demo.business.api.dto.InvestigadorDTO;
 import com.example.demo.business.data.entity.Investigador;
 import com.example.demo.business.api.exception.RecursoNoEncontradoException;
 import com.example.demo.business.data.repository.InvestigadorRepository;
+import com.example.demo.business.data.repository.UsoEquipamientoRepository;
+import com.example.demo.business.data.repository.UsoConsumibleRepository;
 import com.example.demo.business.domain.service.InvestigadorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 public class InvestigadorServiceImpl implements InvestigadorService {
 
     private final InvestigadorRepository investigadorRepository;
+    private final UsoEquipamientoRepository usoEquipamientoRepository;
+    private final UsoConsumibleRepository usoConsumibleRepository;
 
     @Override
     @Transactional
@@ -56,6 +60,23 @@ public class InvestigadorServiceImpl implements InvestigadorService {
                 inv.getProgramaEstudios(),
                 inv.getGradoAcademico()
         );
+    }
+
+    @Override
+    @Transactional
+    public void eliminarInvestigador(Long id) {
+        Investigador inv = investigadorRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Investigador no encontrado con id: " + id));
+
+        boolean tieneUsos = usoEquipamientoRepository.existsByInvestigadorId(id) ||
+                            usoConsumibleRepository.existsByInvestigadorId(id);
+
+        if (tieneUsos) {
+            inv.setActivo(false);
+            investigadorRepository.save(inv);
+        } else {
+            investigadorRepository.delete(inv);
+        }
     }
 }
 

@@ -33,5 +33,11 @@ public class InvestigadorController {
         List<InvestigadorDTO> todos = investigadorService.obtenerTodos();
         return ResponseEntity.ok(todos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarInvestigador(@PathVariable Long id) {
+        investigadorService.eliminarInvestigador(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

@@ -101,7 +101,13 @@ public class PersonalLaboratorioServiceImpl implements PersonalLaboratorioServic
     public void eliminarPersonal(Long id) {
         PersonalLaboratorio personal = personalRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Personal no encontrado con id: " + id));
-        personalRepository.delete(personal);
+        
+        if (personal.getLaboratorio() != null) {
+            personal.setActivo(false);
+            personalRepository.save(personal);
+        } else {
+            personalRepository.delete(personal);
+        }
     }
 }
 

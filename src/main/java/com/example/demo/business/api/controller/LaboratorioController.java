@@ -43,5 +43,11 @@ public class LaboratorioController {
     ) {
         return ResponseEntity.ok(laboratorioService.consultar(escuela, facultad, pageable));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarLaboratorio(@PathVariable Long id) {
+        laboratorioService.eliminarLaboratorio(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

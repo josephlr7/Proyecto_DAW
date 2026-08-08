@@ -30,5 +30,8 @@ public abstract class Persona {
 
     @Column(name = "genero", nullable = false, length = 20)
     private String genero;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
 }
 

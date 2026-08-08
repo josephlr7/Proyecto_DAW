@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS personas (
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     dni VARCHAR(20) NOT NULL UNIQUE,
-    genero VARCHAR(20) NOT NULL
+    genero VARCHAR(20) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 3. Tabla de Laboratorios
@@ -31,7 +32,8 @@ CREATE TABLE IF NOT EXISTS laboratorios (
     resolucion_numero VARCHAR(100),
     correo_institucional VARCHAR(100) NOT NULL UNIQUE,
     ods VARCHAR(100),
-    posee_sistema_gestion BOOLEAN NOT NULL DEFAULT FALSE
+    posee_sistema_gestion BOOLEAN NOT NULL DEFAULT FALSE,
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4. Tabla Derivada: Personal de Laboratorio
@@ -98,6 +100,7 @@ CREATE TABLE IF NOT EXISTS consumibles (
     fecha_vencimiento DATE,
     cantidad DOUBLE NOT NULL DEFAULT 0.0,
     stock_minimo DOUBLE NOT NULL DEFAULT 0.0,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
     laboratorio_id BIGINT NOT NULL,
     CONSTRAINT fk_consumibles_laboratorio FOREIGN KEY (laboratorio_id) 
         REFERENCES laboratorios(id) ON DELETE RESTRICT
