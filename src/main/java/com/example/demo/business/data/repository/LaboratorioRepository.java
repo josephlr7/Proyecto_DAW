@@ -16,5 +16,23 @@ public interface LaboratorioRepository extends JpaRepository<Laboratorio, Long> 
            "LEFT JOIN FETCH l.consumibles c " +
            "WHERE l.id = :id")
     Optional<Laboratorio> encontrarPorIdConDetalles(@Param("id") Long id);
+
+    @Query("""
+            SELECT l
+            FROM Laboratorio l
+            WHERE (
+                :escuela IS NULL
+                OR LOWER(l.escuela) LIKE LOWER(CONCAT('%', :escuela, '%'))
+            )
+            AND (
+                :facultad IS NULL
+                OR LOWER(l.facultad) LIKE LOWER(CONCAT('%', :facultad, '%'))
+            )
+            """)
+    org.springframework.data.domain.Page<Laboratorio> buscarLaboratorios(
+            @Param("escuela") String escuela,
+            @Param("facultad") String facultad,
+            org.springframework.data.domain.Pageable pageable
+    );
 }
 

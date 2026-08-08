@@ -1,0 +1,32 @@
+info:
+  name: Actualizar Empleado
+  type: http
+  seq: 4
+
+http:
+  method: put
+  url: http://localhost:8080/api/v1/empleados/1
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombres": "María Elena",
+        "apellidos": "López Díaz",
+        "numeroDocumento": "45678912",
+        "email": "maria@tienda.com",
+        "telefono": "923456789",
+        "direccion": "Av. Arequipa 550",
+        "cargo": "Supervisora de caja",
+        "sueldo": 2300.00,
+        "fechaContratacion": "2026-07-01"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

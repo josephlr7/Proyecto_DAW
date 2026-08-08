@@ -54,5 +54,15 @@ public class PersonalLaboratorioController {
         personalService.eliminarPersonal(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/consulta")
+    public ResponseEntity<org.springframework.data.domain.Page<PersonalLaboratorioResponseDTO>> consultar(
+            @RequestParam(required = false) String cargo,
+            @RequestParam(required = false) String nombres,
+            @org.springframework.data.web.PageableDefault(page = 0, size = 5, sort = "apellidos")
+            org.springframework.data.domain.Pageable pageable
+    ) {
+        return ResponseEntity.ok(personalService.consultar(cargo, nombres, pageable));
+    }
 }
 

@@ -1,0 +1,32 @@
+info:
+  name: Crear Producto sin Oferta
+  type: http
+  seq: 5
+
+http:
+  method: post
+  url: http://localhost:8080/api/v1/productos
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre": "Apple Pencil USB-C",
+        "descripcion": "Lápiz digital compatible con modelos seleccionados de iPad.",
+        "sku": "APPLE-PENCIL-USBC",
+        "marca": "Apple",
+        "categoria": "Accesorios",
+        "precio": 399.00,
+        "precioOferta": null,
+        "stock": 20,
+        "imagenUrl": "/images/productos/apple-pencil-usbc.png"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

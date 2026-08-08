@@ -1,0 +1,19 @@
+info:
+  name: Ordenar by Nombres Asc
+  type: http
+  seq: 11
+
+http:
+  method: get
+  url: http://localhost:8080/api/v1/clientes/consulta?sort=nombres,asc
+  params:
+    - name: sort
+      value: nombres,asc
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

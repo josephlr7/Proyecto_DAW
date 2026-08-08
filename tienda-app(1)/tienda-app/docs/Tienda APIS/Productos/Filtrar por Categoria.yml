@@ -1,0 +1,19 @@
+info:
+  name: Filtrar por Categoria
+  type: http
+  seq: 11
+
+http:
+  method: get
+  url: http://localhost:8080/api/v1/productos/consulta?categoria=Smartphones
+  params:
+    - name: categoria
+      value: Smartphones
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

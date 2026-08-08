@@ -1,0 +1,15 @@
+info:
+  name: Producto Inexistente
+  type: http
+  seq: 19
+
+http:
+  method: get
+  url: http://localhost:8080/api/v1/productos/999
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

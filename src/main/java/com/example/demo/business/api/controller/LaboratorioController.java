@@ -33,5 +33,15 @@ public class LaboratorioController {
         List<LaboratorioDTO> todos = laboratorioService.obtenerTodos();
         return ResponseEntity.ok(todos);
     }
+
+    @GetMapping("/consulta")
+    public ResponseEntity<org.springframework.data.domain.Page<LaboratorioDTO>> consultar(
+            @RequestParam(required = false) String escuela,
+            @RequestParam(required = false) String facultad,
+            @org.springframework.data.web.PageableDefault(page = 0, size = 5, sort = "escuela")
+            org.springframework.data.domain.Pageable pageable
+    ) {
+        return ResponseEntity.ok(laboratorioService.consultar(escuela, facultad, pageable));
+    }
 }
 

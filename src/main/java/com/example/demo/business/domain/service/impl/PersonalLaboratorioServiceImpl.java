@@ -89,6 +89,14 @@ public class PersonalLaboratorioServiceImpl implements PersonalLaboratorioServic
     }
 
     @Override
+    public org.springframework.data.domain.Page<PersonalLaboratorioResponseDTO> consultar(String cargo, String nombres, org.springframework.data.domain.Pageable pageable) {
+        String cargoNorm = (cargo == null || cargo.isBlank()) ? null : cargo.trim();
+        String nombresNorm = (nombres == null || nombres.isBlank()) ? null : nombres.trim();
+        return personalRepository.buscarPersonal(cargoNorm, nombresNorm, pageable)
+                .map(personalMapper::toResponse);
+    }
+
+    @Override
     @Transactional
     public void eliminarPersonal(Long id) {
         PersonalLaboratorio personal = personalRepository.findById(id)

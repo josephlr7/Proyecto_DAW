@@ -11,5 +11,6 @@ public interface PersonalLaboratorioService {
     List<PersonalLaboratorioResponseDTO> obtenerTodos();
     List<PersonalLaboratorioResponseDTO> obtenerInvestigadoresRenacyt();
     void eliminarPersonal(Long id);
+    org.springframework.data.domain.Page<PersonalLaboratorioResponseDTO> consultar(String cargo, String nombres, org.springframework.data.domain.Pageable pageable);
 }
 

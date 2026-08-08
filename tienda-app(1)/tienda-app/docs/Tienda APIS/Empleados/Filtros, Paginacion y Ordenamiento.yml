@@ -1,0 +1,31 @@
+info:
+  name: Filtros, Paginacion y Ordenamiento
+  type: http
+  seq: 12
+
+http:
+  method: get
+  url: http://localhost:8080/api/v1/empleados/consulta?cargo=supervisor&activo=true&page=0&size=3&sort=sueldo,desc
+  params:
+    - name: cargo
+      value: supervisor
+      type: query
+    - name: activo
+      value: "true"
+      type: query
+    - name: page
+      value: "0"
+      type: query
+    - name: size
+      value: "3"
+      type: query
+    - name: sort
+      value: sueldo,desc
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

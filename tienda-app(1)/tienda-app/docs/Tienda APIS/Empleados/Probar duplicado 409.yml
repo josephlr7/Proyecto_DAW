@@ -1,0 +1,32 @@
+info:
+  name: Probar duplicado 409
+  type: http
+  seq: 13
+
+http:
+  method: post
+  url: http://localhost:8080/api/v1/empleados
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombres": "Empleado",
+        "apellidos": "Duplicado",
+        "numeroDocumento": "45678912",
+        "email": "otro@tienda.com",
+        "telefono": "987654321",
+        "direccion": "Lima",
+        "cargo": "Vendedor",
+        "sueldo": 1800.00,
+        "fechaContratacion": "2026-07-20"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

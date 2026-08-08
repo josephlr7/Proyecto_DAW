@@ -1,0 +1,19 @@
+info:
+  name: Filtrar by Cargo
+  type: http
+  seq: 8
+
+http:
+  method: get
+  url: http://localhost:8080/api/v1/empleados/consulta?cargo=cajera
+  params:
+    - name: cargo
+      value: cajera
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

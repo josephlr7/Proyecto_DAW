@@ -1,0 +1,29 @@
+info:
+  name: Actualizar Cliente
+  type: http
+  seq: 4
+
+http:
+  method: put
+  url: http://localhost:8080/api/v1/clientes/1
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombres": "Juan Carlos",
+        "apellidos": "Pérez Ramos",
+        "numeroDocumento": "12345678",
+        "email": "juancarlos@gmail.com",
+        "telefono": "999888777",
+        "direccion": "Av. Arequipa 456"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

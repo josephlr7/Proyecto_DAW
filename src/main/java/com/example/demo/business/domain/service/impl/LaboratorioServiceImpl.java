@@ -40,6 +40,14 @@ public class LaboratorioServiceImpl implements LaboratorioService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public org.springframework.data.domain.Page<LaboratorioDTO> consultar(String escuela, String facultad, org.springframework.data.domain.Pageable pageable) {
+        String escuelaNorm = (escuela == null || escuela.isBlank()) ? null : escuela.trim();
+        String facultadNorm = (facultad == null || facultad.isBlank()) ? null : facultad.trim();
+        return laboratorioRepository.buscarLaboratorios(escuelaNorm, facultadNorm, pageable)
+                .map(this::toDto);
+    }
+
     private Laboratorio toEntity(LaboratorioDTO dto) {
         Laboratorio entity = new Laboratorio();
         entity.setFacultad(dto.facultad());

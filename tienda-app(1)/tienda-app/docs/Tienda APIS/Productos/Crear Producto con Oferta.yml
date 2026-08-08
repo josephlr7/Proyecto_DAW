@@ -1,0 +1,32 @@
+info:
+  name: Crear Producto con Oferta
+  type: http
+  seq: 4
+
+http:
+  method: post
+  url: http://localhost:8080/api/v1/productos
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre": "MacBook Air 13 M4",
+        "descripcion": "MacBook Air de 13 pulgadas con chip M4.",
+        "sku": "MACBOOK-AIR-M4-13",
+        "marca": "Apple",
+        "categoria": "Laptops",
+        "precio": 4999.00,
+        "precioOferta": 4699.00,
+        "stock": 5,
+        "imagenUrl": "/images/productos/macbook-air-m4.png"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

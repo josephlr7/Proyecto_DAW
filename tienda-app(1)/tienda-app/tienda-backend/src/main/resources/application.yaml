@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: tienda-backend
+
+  profiles:
+    default: dev
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+
+    hibernate:
+      ddl-auto: validate
+
+    properties:
+      hibernate:
+        format_sql: true
+
+token:
+  signing:
+    key: RGVzYXJyb2xsb19kZV9BcGxpY2FjaW9uZXNfV2Vi
+
+server:
+  port: 8080

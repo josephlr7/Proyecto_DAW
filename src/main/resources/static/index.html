@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - G-LAB UNT</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div id="alertBox" class="alert-box"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-logo">
+            <h2>G-LAB UNT</h2>
+        </div>
+        <div class="nav-user">
+            <span class="user-badge" id="userBadge">ADMIN</span>
+            <button onclick="clearSession()" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1>Laboratorios de Investigación</h1>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 5px;">
+                    Administración y trazabilidad de recursos e infraestructura.
+                </p>
+            </div>
+            <button onclick="openModal()" class="btn-action">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Registrar Laboratorio
+            </button>
+        </div>
+
+        <!-- Labs List -->
+        <div class="glass-panel" style="padding: 20px; overflow: hidden;">
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Facultad</th>
+                            <th>Escuela</th>
+                            <th>Área de Investigación</th>
+                            <th>Categoría</th>
+                            <th>Resolución</th>
+                            <th>Sist. Gestión</th>
+                        </tr>
+                    </thead>
+                    <tbody id="labsTableBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                <p>Cargando laboratorios...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paging Controls -->
+            <div class="pagination-container">
+                <div class="page-info" id="pageNumInfo">Página 1 de 1</div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="btnPrev" onclick="cambiarPagina(-1)" class="btn-page" disabled>Anterior</button>
+                    <button id="btnNext" onclick="cambiarPagina(1)" class="btn-page" disabled>Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Form: Registrar Laboratorio -->
+    <div id="labModal" class="modal-overlay" onclick="handleOutsideClick(event)">
+        <div class="glass-panel modal-content">
+            <div class="modal-header">
+                <h3>Nuevo Laboratorio</h3>
+                <button onclick="closeModal()" class="btn-close">&times;</button>
+            </div>
+            
+            <form id="labForm">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="facultad">Facultad</label>
+                        <input type="text" id="facultad" class="input-control" placeholder="Ej. Ingeniería" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="escuela">Escuela</label>
+                        <input type="text" id="escuela" class="input-control" placeholder="Ej. Sistemas" required>
+                    </div>
+                    <div class="input-group form-full-width">
+                        <label for="areaInvestigacion">Área de Investigación</label>
+                        <input type="text" id="areaInvestigacion" class="input-control" placeholder="Ej. Ingeniería y Tecnología" required>
+                    </div>
+                    <div class="input-group form-full-width">
+                        <label for="lineasInvestigacion">Líneas de Investigación</label>
+                        <input type="text" id="lineasInvestigacion" class="input-control" placeholder="Ej. Inteligencia Artificial, Redes" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" class="select-control" required>
+                            <option value="Consolidado">Consolidado</option>
+                            <option value="En Formación">En Formación</option>
+                            <option value="Registrado">Registrado</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="resolucionNumero">N° Resolución</label>
+                        <input type="text" id="resolucionNumero" class="input-control" placeholder="Ej. RESOL-UNT-2026" required>
+                    </div>
+                    <div class="input-group form-full-width">
+                        <label for="correoInstitucional">Correo Institucional</label>
+                        <input type="email" id="correoInstitucional" class="input-control" placeholder="lab@unt.edu.pe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ods">ODS Asociado</label>
+                        <input type="text" id="ods" class="input-control" placeholder="Ej. ODS 9" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="poseeSistemaGestion">¿Sistema de Gestión?</label>
+                        <select id="poseeSistemaGestion" class="select-control" required>
+                            <option value="true">Sí posee</option>
+                            <option value="false">No posee</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
+                    <button type="button" onclick="closeModal()" class="btn-page">Cancelar</button>
+                    <button type="submit" class="btn-action" style="padding: 10px 24px;">Guardar Laboratorio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Check if user is logged in
+        checkSession(true);
+
+        // Display logged in username/role
+        const userBadge = document.getElementById('userBadge');
+        if (userBadge) {
+            const username = localStorage.getItem('username') || 'Usuario';
+            const rol = localStorage.getItem('rol') || 'USER';
+            userBadge.textContent = `${username} (${rol})`;
+        }
+
+        // Load laboratories on startup
+        let page = 0;
+        cargarLaboratorios(page);
+
+        function cambiarPagina(direction) {
+            const newPage = page + direction;
+            if (newPage >= 0) {
+                page = newPage;
+                cargarLaboratorios(page);
+            }
+        }
+
+        // Submit form
+        document.getElementById('labForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const payload = {
+                facultad: document.getElementById('facultad').value.trim(),
+                escuela: document.getElementById('escuela').value.trim(),
+                areaInvestigacion: document.getElementById('areaInvestigacion').value.trim(),
+                lineasInvestigacion: document.getElementById('lineasInvestigacion').value.trim(),
+                categoria: document.getElementById('categoria').value,
+                resolucionNumero: document.getElementById('resolucionNumero').value.trim(),
+                correoInstitucional: document.getElementById('correoInstitucional').value.trim(),
+                ods: document.getElementById('ods').value.trim(),
+                poseeSistemaGestion: document.getElementById('poseeSistemaGestion').value === 'true'
+            };
+            
+            registrarLaboratorio(payload);
+        });
+
+        // Close modal when clicking outside form panel
+        function handleOutsideClick(e) {
+            if (e.target.id === 'labModal') {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
