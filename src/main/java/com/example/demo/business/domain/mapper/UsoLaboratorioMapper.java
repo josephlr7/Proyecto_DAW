@@ -10,14 +10,14 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UsoLaboratorioMapper {
 
-    @Mapping(target = "investigadorId", expression = "java(entity.getInvestigador() != null ? entity.getInvestigador().getId() : null)")
-    @Mapping(target = "investigadorNombreCompleto", expression = "java(entity.getInvestigador() != null ? entity.getInvestigador().getNombres() + \" \" + entity.getInvestigador().getApellidos() : null)")
+    @Mapping(target = "investigadorId", expression = "java(entity.getUsuario() != null ? entity.getUsuario().getId() : null)")
+    @Mapping(target = "investigadorNombreCompleto", expression = "java(entity.getUsuario() != null ? entity.getUsuario().getNombre() : null)")
     @Mapping(target = "equipamientoId", expression = "java(entity.getEquipamiento() != null ? entity.getEquipamiento().getId() : null)")
     @Mapping(target = "equipamientoNombre", expression = "java(entity.getEquipamiento() != null ? entity.getEquipamiento().getNombre() : null)")
     UsoEquipamientoResponseDTO toEquipamientoResponse(UsoEquipamiento entity);
 
-    @Mapping(target = "investigadorId", expression = "java(entity.getInvestigador() != null ? entity.getInvestigador().getId() : null)")
-    @Mapping(target = "investigadorNombreCompleto", expression = "java(entity.getInvestigador() != null ? entity.getInvestigador().getNombres() + \" \" + entity.getInvestigador().getApellidos() : null)")
+    @Mapping(target = "investigadorId", expression = "java(entity.getUsuario() != null ? entity.getUsuario().getId() : null)")
+    @Mapping(target = "investigadorNombreCompleto", expression = "java(entity.getUsuario() != null ? entity.getUsuario().getNombre() : null)")
     @Mapping(target = "consumibleId", expression = "java(entity.getConsumible() != null ? entity.getConsumible().getId() : null)")
     @Mapping(target = "consumibleNombre", expression = "java(entity.getConsumible() != null ? entity.getConsumible().getNombre() : null)")
     UsoConsumibleResponseDTO toConsumibleResponse(UsoConsumible entity);

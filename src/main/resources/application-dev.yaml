@@ -4,6 +4,10 @@ spring:
     username: root
     password: "170706"
 
+  sql:
+    init:
+      mode: always
+
   jpa:
     show-sql: true
     properties:

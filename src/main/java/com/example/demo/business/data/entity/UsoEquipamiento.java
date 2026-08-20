@@ -21,8 +21,8 @@ public class UsoEquipamiento {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "investigador_id", nullable = false)
-    private Investigador investigador;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private com.example.demo.business.security.data.entity.Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipamiento_id", nullable = false)
@@ -45,5 +45,8 @@ public class UsoEquipamiento {
 
     @Column(name = "observacion", length = 255)
     private String observacion;
+
+    @Column(name = "nombre_investigador", length = 150)
+    private String nombreInvestigador;
 }
 

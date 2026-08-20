@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface PersonalLaboratorioRepository extends JpaRepository<PersonalLaboratorio, Long> {
 
-    @Query("SELECT p FROM PersonalLaboratorio p JOIN FETCH p.perfil WHERE p.renacyt = true")
+    java.util.Optional<PersonalLaboratorio> findByDni(String dni);
+
+    @Query("SELECT p FROM PersonalLaboratorio p WHERE p.renacyt = true")
     List<PersonalLaboratorio> buscarInvestigadoresRenacytConPerfil();
 
     @Query("""

@@ -8,6 +8,7 @@ public interface LaboratorioService {
     LaboratorioDTO obtenerPorId(Long id);
     List<LaboratorioDTO> obtenerTodos();
     org.springframework.data.domain.Page<LaboratorioDTO> consultar(String escuela, String facultad, org.springframework.data.domain.Pageable pageable);
+    LaboratorioDTO actualizarLaboratorio(Long id, LaboratorioDTO dto);
     void eliminarLaboratorio(Long id);
 }
 

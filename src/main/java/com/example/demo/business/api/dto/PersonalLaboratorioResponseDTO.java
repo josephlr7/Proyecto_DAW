@@ -6,15 +6,12 @@ public record PersonalLaboratorioResponseDTO(
     String apellidos,
     String dni,
     String genero,
-    String resolucionNumero,
     String cargo,
     String fotoUrl,
     Boolean esDocente,
     Boolean renacyt,
     Boolean esDocenteInvestigadorUNT,
     String condicion,
-    String categoria,
-    Long laboratorioId,
-    PerfilPersonalDTO perfil
+    Long laboratorioId
 ) {}
 

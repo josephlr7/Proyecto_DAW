@@ -1,5 +1,9 @@
 package com.example.demo.business.domain.service.impl;
 
+import com.example.demo.business.data.entity.Facultad;
+import com.example.demo.business.data.entity.Escuela;
+import com.example.demo.business.data.repository.FacultadRepository;
+import com.example.demo.business.data.repository.EscuelaRepository;
 import com.example.demo.business.api.dto.LaboratorioDTO;
 import com.example.demo.business.data.entity.Laboratorio;
 import com.example.demo.business.api.exception.RecursoNoEncontradoException;
@@ -17,6 +21,8 @@ import java.util.stream.Collectors;
 public class LaboratorioServiceImpl implements LaboratorioService {
 
     private final LaboratorioRepository laboratorioRepository;
+    private final FacultadRepository facultadRepository;
+    private final EscuelaRepository escuelaRepository;
 
     @Override
     @Transactional
@@ -48,16 +54,37 @@ public class LaboratorioServiceImpl implements LaboratorioService {
                 .map(this::toDto);
     }
 
+    @Override
+    @Transactional
+    public LaboratorioDTO actualizarLaboratorio(Long id, LaboratorioDTO dto) {
+        Laboratorio entity = laboratorioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Laboratorio no encontrado con id: " + id));
+
+        Facultad fac = facultadRepository.findByNombreIgnoreCase(dto.facultad())
+                .orElseGet(() -> facultadRepository.save(new Facultad(dto.facultad())));
+
+        Escuela esc = escuelaRepository.findByNombreIgnoreCaseAndFacultad(dto.escuela(), fac)
+                .orElseGet(() -> escuelaRepository.save(new Escuela(dto.escuela(), fac)));
+
+        entity.setFacultad(fac);
+        entity.setEscuela(esc);
+        entity.setPoseeSistemaGestion(dto.poseeSistemaGestion());
+
+        Laboratorio guardado = laboratorioRepository.save(entity);
+        return toDto(guardado);
+    }
+
     private Laboratorio toEntity(LaboratorioDTO dto) {
         Laboratorio entity = new Laboratorio();
-        entity.setFacultad(dto.facultad());
-        entity.setEscuela(dto.escuela());
-        entity.setAreaInvestigacion(dto.areaInvestigacion());
-        entity.setLineasInvestigacion(dto.lineasInvestigacion());
-        entity.setCategoria(dto.categoria());
-        entity.setResolucionNumero(dto.resolucionNumero());
-        entity.setCorreoInstitucional(dto.correoInstitucional());
-        entity.setOds(dto.ods());
+        
+        Facultad fac = facultadRepository.findByNombreIgnoreCase(dto.facultad())
+                .orElseGet(() -> facultadRepository.save(new Facultad(dto.facultad())));
+
+        Escuela esc = escuelaRepository.findByNombreIgnoreCaseAndFacultad(dto.escuela(), fac)
+                .orElseGet(() -> escuelaRepository.save(new Escuela(dto.escuela(), fac)));
+
+        entity.setFacultad(fac);
+        entity.setEscuela(esc);
         entity.setPoseeSistemaGestion(dto.poseeSistemaGestion());
         return entity;
     }
@@ -65,14 +92,8 @@ public class LaboratorioServiceImpl implements LaboratorioService {
     private LaboratorioDTO toDto(Laboratorio entity) {
         return new LaboratorioDTO(
                 entity.getId(),
-                entity.getFacultad(),
-                entity.getEscuela(),
-                entity.getAreaInvestigacion(),
-                entity.getLineasInvestigacion(),
-                entity.getCategoria(),
-                entity.getResolucionNumero(),
-                entity.getCorreoInstitucional(),
-                entity.getOds(),
+                entity.getFacultad().getNombre(),
+                entity.getEscuela().getNombre(),
                 entity.getPoseeSistemaGestion()
         );
     }

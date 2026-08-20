@@ -43,43 +43,28 @@ class DemoApplicationTests {
                 null,
                 "Ingeniería",
                 "Sistemas e Informática",
-                "Ingeniería y Tecnología",
-                "Inteligencia Artificial, Ciberseguridad",
-                "Consolidado",
-                "RESOL-2026-UNT",
-                "laboratorio.sistemas@unt.edu.pe",
-                "ODS 9",
                 true
         );
         LaboratorioDTO labCreado = laboratorioService.registrarLaboratorio(labDto);
         assertNotNull(labCreado.id());
         assertEquals("Ingeniería", labCreado.facultad());
 
-        // 2. Registrar Personal de Laboratorio (con perfil uno a uno)
-        PerfilPersonalDTO perfilDto = new PerfilPersonalDTO(
-                LocalDate.of(2026, 1, 1),
-                "Ingeniero con 10 años de experiencia en administración de laboratorios.",
-                "Oficina 204"
-        );
+        // 2. Registrar Personal de Laboratorio
         PersonalLaboratorioRequestDTO personalReq = new PersonalLaboratorioRequestDTO(
                 "Juan Carlos",
                 "Perez Gomez",
-                "12345678",
+                "99999999",
                 "Masculino",
-                "RESOL-PERS-001",
                 "Jefe de Laboratorio",
                 "http://photos.com/perez.jpg",
                 true,
                 true, // Renacyt
                 true,
                 "Nombrado",
-                "Principal",
-                labCreado.id(),
-                perfilDto
+                labCreado.id()
         );
         PersonalLaboratorioResponseDTO personalCreado = personalService.registrarPersonal(personalReq);
         assertNotNull(personalCreado.id());
-        assertNotNull(personalCreado.perfil());
         assertEquals("Jefe de Laboratorio", personalCreado.cargo());
 
         // Verificar búsqueda de personal Renacyt

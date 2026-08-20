@@ -15,9 +15,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PersonalLaboratorio extends Persona {
 
-    @Column(name = "resolucion_numero", length = 100)
-    private String resolucionNumero;
-
     @Column(name = "cargo", nullable = false, length = 50)
     private String cargo;
 
@@ -35,13 +32,6 @@ public class PersonalLaboratorio extends Persona {
 
     @Column(name = "condicion", nullable = false, length = 50)
     private String condicion;
-
-    @Column(name = "categoria", nullable = false, length = 50)
-    private String categoria;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    private PerfilPersonal perfil;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "laboratorio_id")

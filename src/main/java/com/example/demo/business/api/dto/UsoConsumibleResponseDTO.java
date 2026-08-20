@@ -11,6 +11,7 @@ public record UsoConsumibleResponseDTO(
     String consumibleNombre,
     String tipoInvestigacion,
     String actividadNombre,
+    String nombreInvestigador,
     Double cantidad,
     LocalDate fecha,
     LocalTime hora,

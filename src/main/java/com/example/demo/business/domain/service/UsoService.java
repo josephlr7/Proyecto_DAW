@@ -8,5 +8,11 @@ import com.example.demo.business.api.dto.UsoEquipamientoResponseDTO;
 public interface UsoService {
     UsoEquipamientoResponseDTO registrarUsoEquipamiento(UsoEquipamientoRequestDTO request);
     UsoConsumibleResponseDTO registrarUsoConsumible(UsoConsumibleRequestDTO request);
+    java.util.List<UsoEquipamientoResponseDTO> obtenerUsosEquipamiento();
+    java.util.List<UsoConsumibleResponseDTO> obtenerUsosConsumible();
+    UsoEquipamientoResponseDTO editarUsoEquipamiento(Long id, UsoEquipamientoRequestDTO request);
+    UsoConsumibleResponseDTO editarUsoConsumible(Long id, UsoConsumibleRequestDTO request);
+    void eliminarUsoEquipamiento(Long id);
+    void eliminarUsoConsumible(Long id);
 }
 

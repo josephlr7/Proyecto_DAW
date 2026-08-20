@@ -35,10 +35,6 @@ public class PersonalLaboratorioServiceImpl implements PersonalLaboratorioServic
             personal.setLaboratorio(lab);
         }
 
-        if (personal.getPerfil() != null) {
-            personal.getPerfil().setPersonal(personal);
-        }
-
         PersonalLaboratorio guardado = personalRepository.save(personal);
         return personalMapper.toResponse(guardado);
     }
@@ -57,10 +53,6 @@ public class PersonalLaboratorioServiceImpl implements PersonalLaboratorioServic
             personal.setLaboratorio(lab);
         } else {
             personal.setLaboratorio(null);
-        }
-
-        if (personal.getPerfil() != null) {
-            personal.getPerfil().setPersonal(personal);
         }
 
         PersonalLaboratorio guardado = personalRepository.save(personal);

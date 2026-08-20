@@ -44,6 +44,12 @@ public class LaboratorioController {
         return ResponseEntity.ok(laboratorioService.consultar(escuela, facultad, pageable));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<LaboratorioDTO> actualizarLaboratorio(@PathVariable Long id, @Valid @RequestBody LaboratorioDTO dto) {
+        LaboratorioDTO actualizado = laboratorioService.actualizarLaboratorio(id, dto);
+        return ResponseEntity.ok(actualizado);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarLaboratorio(@PathVariable Long id) {
         laboratorioService.eliminarLaboratorio(id);

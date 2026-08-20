@@ -20,29 +20,13 @@ public class Laboratorio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "facultad", nullable = false, length = 100)
-    private String facultad;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "facultad_id", nullable = false)
+    private Facultad facultad;
 
-    @Column(name = "escuela", nullable = false, length = 100)
-    private String escuela;
-
-    @Column(name = "area_investigacion", nullable = false, length = 100)
-    private String areaInvestigacion;
-
-    @Column(name = "lineas_investigacion", nullable = false, length = 500)
-    private String lineasInvestigacion;
-
-    @Column(name = "categoria", nullable = false, length = 50)
-    private String categoria;
-
-    @Column(name = "resolucion_numero", length = 100)
-    private String resolucionNumero;
-
-    @Column(name = "correo_institucional", nullable = false, unique = true, length = 100)
-    private String correoInstitucional;
-
-    @Column(name = "ods", length = 100)
-    private String ods;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "escuela_id", nullable = false)
+    private Escuela escuela;
 
     @Column(name = "posee_sistema_gestion", nullable = false)
     private Boolean poseeSistemaGestion = false;

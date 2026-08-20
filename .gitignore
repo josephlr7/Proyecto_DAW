@@ -35,3 +35,6 @@ build/
 # Teacher reference project
 tienda-app (1)/
 tienda-app (1).zip
+
+# Frontend folder (already in its own repo)
+laboratorios-frontend/

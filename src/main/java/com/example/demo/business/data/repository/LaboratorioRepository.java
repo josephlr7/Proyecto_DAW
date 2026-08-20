@@ -17,16 +17,32 @@ public interface LaboratorioRepository extends JpaRepository<Laboratorio, Long> 
            "WHERE l.id = :id")
     Optional<Laboratorio> encontrarPorIdConDetalles(@Param("id") Long id);
 
-    @Query("""
+    @Query(value = """
             SELECT l
             FROM Laboratorio l
+            JOIN FETCH l.facultad f
+            JOIN FETCH l.escuela e
             WHERE (
                 :escuela IS NULL
-                OR LOWER(l.escuela) LIKE LOWER(CONCAT('%', :escuela, '%'))
+                OR LOWER(e.nombre) LIKE LOWER(CONCAT('%', :escuela, '%'))
             )
             AND (
                 :facultad IS NULL
-                OR LOWER(l.facultad) LIKE LOWER(CONCAT('%', :facultad, '%'))
+                OR LOWER(f.nombre) LIKE LOWER(CONCAT('%', :facultad, '%'))
+            )
+            """,
+           countQuery = """
+            SELECT COUNT(l)
+            FROM Laboratorio l
+            JOIN l.facultad f
+            JOIN l.escuela e
+            WHERE (
+                :escuela IS NULL
+                OR LOWER(e.nombre) LIKE LOWER(CONCAT('%', :escuela, '%'))
+            )
+            AND (
+                :facultad IS NULL
+                OR LOWER(f.nombre) LIKE LOWER(CONCAT('%', :facultad, '%'))
             )
             """)
     org.springframework.data.domain.Page<Laboratorio> buscarLaboratorios(
@@ -34,5 +50,8 @@ public interface LaboratorioRepository extends JpaRepository<Laboratorio, Long> 
             @Param("facultad") String facultad,
             org.springframework.data.domain.Pageable pageable
     );
+
+    boolean existsByEscuelaId(Long escuelaId);
+    boolean existsByFacultadId(Long facultadId);
 }
 

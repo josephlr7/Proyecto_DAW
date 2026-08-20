@@ -5,6 +5,10 @@ spring:
   profiles:
     default: dev
 
+  sql:
+    init:
+      mode: never
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -18,6 +22,11 @@ spring:
           batch_size: 20
         order_inserts: true
         order_updates: true
+
+security:
+  jwt:
+    secret: RGVzYXJyb2xsb19BcGxpY2FjaW9uZXNfV2ViXzIwMjY=
+    expiration: 3600000
 
 server:
   port: 8080

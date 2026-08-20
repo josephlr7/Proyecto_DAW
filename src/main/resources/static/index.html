@@ -11,8 +11,13 @@
 
     <!-- Navigation Header -->
     <header class="navbar">
-        <div class="nav-logo">
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 40px;">
             <h2>G-LAB UNT</h2>
+            <nav class="nav-tabs">
+                <a href="#" class="tab-link active" onclick="switchTab('labs')">Laboratorios</a>
+                <a href="#" class="tab-link" onclick="switchTab('facultades')">Facultades</a>
+                <a href="#" class="tab-link" onclick="switchTab('escuelas')">Escuelas</a>
+            </nav>
         </div>
         <div class="nav-user">
             <span class="user-badge" id="userBadge">ADMIN</span>
@@ -22,75 +27,165 @@
 
     <!-- Main Dashboard -->
     <main class="dashboard-container">
-        <div class="dashboard-header">
-            <div>
-                <h1>Laboratorios de Investigación</h1>
-                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 5px;">
-                    Administración y trazabilidad de recursos e infraestructura.
-                </p>
-            </div>
-            <button onclick="openModal()" class="btn-action">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                Registrar Laboratorio
-            </button>
-        </div>
-
-        <!-- Labs List -->
-        <div class="glass-panel" style="padding: 20px; overflow: hidden;">
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Facultad</th>
-                            <th>Escuela</th>
-                            <th>Área de Investigación</th>
-                            <th>Categoría</th>
-                            <th>Resolución</th>
-                            <th>Sist. Gestión</th>
-                        </tr>
-                    </thead>
-                    <tbody id="labsTableBody">
-                        <tr>
-                            <td colspan="7" class="empty-state">
-                                <p>Cargando laboratorios...</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- SECCIÓN LABORATORIOS -->
+        <section id="labsSection" class="dashboard-section">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Laboratorios de Investigación</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 5px;">
+                        Administración y trazabilidad de recursos e infraestructura.
+                    </p>
+                </div>
+                <button onclick="openModal()" class="btn-action">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Registrar Laboratorio
+                </button>
             </div>
 
-            <!-- Paging Controls -->
-            <div class="pagination-container">
-                <div class="page-info" id="pageNumInfo">Página 1 de 1</div>
-                <div style="display: flex; gap: 10px;">
-                    <button id="btnPrev" onclick="cambiarPagina(-1)" class="btn-page" disabled>Anterior</button>
-                    <button id="btnNext" onclick="cambiarPagina(1)" class="btn-page" disabled>Siguiente</button>
+            <!-- Labs List -->
+            <div class="glass-panel" style="padding: 20px; overflow: hidden;">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Facultad</th>
+                                <th>Escuela</th>
+                                <th>Área de Investigación</th>
+                                <th>Categoría</th>
+                                <th>Resolución</th>
+                                <th>Sist. Gestión</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="labsTableBody">
+                            <tr>
+                                <td colspan="8" class="empty-state">
+                                    <p>Cargando laboratorios...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paging Controls -->
+                <div class="pagination-container">
+                    <div class="page-info" id="pageNumInfo">Página 1 de 1</div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="btnPrev" onclick="cambiarPagina(-1)" class="btn-page" disabled>Anterior</button>
+                        <button id="btnNext" onclick="cambiarPagina(1)" class="btn-page" disabled>Siguiente</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- SECCIÓN FACULTADES -->
+        <section id="facultadesSection" class="dashboard-section" style="display: none;">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Facultades</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 5px;">
+                        Gestión de Facultades de la Universidad Nacional de Trujillo.
+                    </p>
+                </div>
+                <button onclick="openFacultadModal()" class="btn-action">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Registrar Facultad
+                </button>
+            </div>
+
+            <div class="glass-panel" style="padding: 20px; overflow: hidden;">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre de la Facultad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultadesTableBody">
+                            <tr>
+                                <td colspan="3" class="empty-state">
+                                    <p>Cargando facultades...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN ESCUELAS -->
+        <section id="escuelasSection" class="dashboard-section" style="display: none;">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Escuelas Profesionales</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 5px;">
+                        Gestión de Programas de Estudio por cada Facultad.
+                    </p>
+                </div>
+                <button onclick="openEscuelaModal()" class="btn-action">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Registrar Escuela
+                </button>
+            </div>
+
+            <div class="glass-panel" style="padding: 20px; overflow: hidden;">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre de la Escuela</th>
+                                <th>Facultad Perteneciente</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="escuelasTableBody">
+                            <tr>
+                                <td colspan="4" class="empty-state">
+                                    <p>Cargando escuelas...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Modal Form: Registrar Laboratorio -->
     <div id="labModal" class="modal-overlay" onclick="handleOutsideClick(event)">
         <div class="glass-panel modal-content">
             <div class="modal-header">
-                <h3>Nuevo Laboratorio</h3>
+                <h3 id="modalTitle">Nuevo Laboratorio</h3>
                 <button onclick="closeModal()" class="btn-close">&times;</button>
             </div>
             
             <form id="labForm">
+                <input type="hidden" id="labId">
                 <div class="form-grid">
                     <div class="input-group">
                         <label for="facultad">Facultad</label>
-                        <input type="text" id="facultad" class="input-control" placeholder="Ej. Ingeniería" required>
+                        <select id="facultad" class="select-control" required>
+                            <option value="">Seleccione Facultad</option>
+                        </select>
                     </div>
                     <div class="input-group">
                         <label for="escuela">Escuela</label>
-                        <input type="text" id="escuela" class="input-control" placeholder="Ej. Sistemas" required>
+                        <select id="escuela" class="select-control" required disabled>
+                            <option value="">Seleccione Escuela</option>
+                        </select>
                     </div>
                     <div class="input-group form-full-width">
                         <label for="areaInvestigacion">Área de Investigación</label>
@@ -131,7 +226,59 @@
                 
                 <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
                     <button type="button" onclick="closeModal()" class="btn-page">Cancelar</button>
-                    <button type="submit" class="btn-action" style="padding: 10px 24px;">Guardar Laboratorio</button>
+                    <button type="submit" id="btnSubmitLab" class="btn-action" style="padding: 10px 24px;">Guardar Laboratorio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Form: Registrar/Editar Facultad -->
+    <div id="facultadModal" class="modal-overlay" onclick="handleOutsideClickFacultad(event)">
+        <div class="glass-panel modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3 id="facultadModalTitle">Nueva Facultad</h3>
+                <button onclick="closeFacultadModal()" class="btn-close">&times;</button>
+            </div>
+            <form id="facultadForm">
+                <input type="hidden" id="facultadId">
+                <div class="form-grid" style="grid-template-columns: 1fr;">
+                    <div class="input-group">
+                        <label for="facultadNombre">Nombre de la Facultad</label>
+                        <input type="text" id="facultadNombre" class="input-control" placeholder="Ej. Ingeniería" required>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
+                    <button type="button" onclick="closeFacultadModal()" class="btn-page">Cancelar</button>
+                    <button type="submit" id="btnSubmitFacultad" class="btn-action" style="padding: 10px 24px;">Guardar Facultad</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Form: Registrar/Editar Escuela -->
+    <div id="escuelaModal" class="modal-overlay" onclick="handleOutsideClickEscuela(event)">
+        <div class="glass-panel modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3 id="escuelaModalTitle">Nueva Escuela</h3>
+                <button onclick="closeEscuelaModal()" class="btn-close">&times;</button>
+            </div>
+            <form id="escuelaForm">
+                <input type="hidden" id="escuelaId">
+                <div class="form-grid" style="grid-template-columns: 1fr;">
+                    <div class="input-group">
+                        <label for="escuelaNombre">Nombre de la Escuela</label>
+                        <input type="text" id="escuelaNombre" class="input-control" placeholder="Ej. Ingeniería de Sistemas" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="escuelaFacultadSelect">Facultad Asociada</label>
+                        <select id="escuelaFacultadSelect" class="select-control" required>
+                            <option value="">Seleccione Facultad</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
+                    <button type="button" onclick="closeEscuelaModal()" class="btn-page">Cancelar</button>
+                    <button type="submit" id="btnSubmitEscuela" class="btn-action" style="padding: 10px 24px;">Guardar Escuela</button>
                 </div>
             </form>
         </div>
@@ -162,13 +309,29 @@
             }
         }
 
+        // Setup dropdown change listener
+        document.getElementById('facultad').addEventListener('change', function() {
+            const facId = this.value;
+            const escuelaSelect = document.getElementById('escuela');
+            escuelaSelect.innerHTML = '<option value="">Seleccione Escuela</option>';
+            if (!facId) {
+                escuelaSelect.disabled = true;
+                return;
+            }
+            cargarEscuelasDropdown(facId);
+        });
+
         // Submit form
         document.getElementById('labForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const labId = document.getElementById('labId').value;
+            const facSelect = document.getElementById('facultad');
+            const escSelect = document.getElementById('escuela');
+            
             const payload = {
-                facultad: document.getElementById('facultad').value.trim(),
-                escuela: document.getElementById('escuela').value.trim(),
+                facultad: facSelect.options[facSelect.selectedIndex].text,
+                escuela: escSelect.options[escSelect.selectedIndex].text,
                 areaInvestigacion: document.getElementById('areaInvestigacion').value.trim(),
                 lineasInvestigacion: document.getElementById('lineasInvestigacion').value.trim(),
                 categoria: document.getElementById('categoria').value,
@@ -178,14 +341,73 @@
                 poseeSistemaGestion: document.getElementById('poseeSistemaGestion').value === 'true'
             };
             
-            registrarLaboratorio(payload);
+            if (labId) {
+                actualizarLaboratorio(labId, payload);
+            } else {
+                registrarLaboratorio(payload);
+            }
         });
 
-        // Close modal when clicking outside form panel
-        function handleOutsideClick(e) {
-            if (e.target.id === 'labModal') {
-                closeModal();
+        // Submit Facultad form
+        document.getElementById('facultadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('facultadId').value;
+            const payload = {
+                nombre: document.getElementById('facultadNombre').value.trim()
+            };
+            if (id) {
+                actualizarFacultad(id, payload);
+            } else {
+                registrarFacultad(payload);
             }
+        });
+
+        // Submit Escuela form
+        document.getElementById('escuelaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('escuelaId').value;
+            const payload = {
+                nombre: document.getElementById('escuelaNombre').value.trim(),
+                facultadId: parseInt(document.getElementById('escuelaFacultadSelect').value)
+            };
+            if (id) {
+                actualizarEscuela(id, payload);
+            } else {
+                registrarEscuela(payload);
+            }
+        });
+
+        // Switch tabs logic
+        function switchTab(tab) {
+            // Update active tab link class
+            document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(el => el.style.display = 'none');
+            
+            // Show active section and load data
+            if (tab === 'labs') {
+                document.getElementById('labsSection').style.display = 'flex';
+                cargarLaboratorios(page);
+            } else if (tab === 'facultades') {
+                document.getElementById('facultadesSection').style.display = 'flex';
+                cargarFacultades();
+            } else if (tab === 'escuelas') {
+                document.getElementById('escuelasSection').style.display = 'flex';
+                cargarEscuelas();
+            }
+        }
+
+        // Close modals when clicking outside
+        function handleOutsideClick(e) {
+            if (e.target.id === 'labModal') closeModal();
+        }
+        function handleOutsideClickFacultad(e) {
+            if (e.target.id === 'facultadModal') closeFacultadModal();
+        }
+        function handleOutsideClickEscuela(e) {
+            if (e.target.id === 'escuelaModal') closeEscuelaModal();
         }
     </script>
 </body>

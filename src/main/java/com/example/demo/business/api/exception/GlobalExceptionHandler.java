@@ -42,6 +42,32 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(RecursoDuplicadoException.class)
+    public ResponseEntity<ApiErrorResponse> manejarRecursoDuplicado(
+            RecursoDuplicadoException exception,
+            HttpServletRequest request
+    ) {
+        return construirRespuesta(
+                HttpStatus.CONFLICT,
+                exception.getMessage(),
+                request.getRequestURI(),
+                Map.of()
+        );
+    }
+
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+    public ResponseEntity<ApiErrorResponse> manejarAutenticacion(
+            org.springframework.security.core.AuthenticationException exception,
+            HttpServletRequest request
+    ) {
+        return construirRespuesta(
+                HttpStatus.UNAUTHORIZED,
+                "Usuario o contraseña incorrectos",
+                request.getRequestURI(),
+                Map.of()
+        );
+    }
+
     @ExceptionHandler(SolicitudInvalidaException.class)
     public ResponseEntity<ApiErrorResponse> manejarSolicitudInvalida(
             SolicitudInvalidaException exception,

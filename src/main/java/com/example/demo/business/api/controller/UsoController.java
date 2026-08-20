@@ -34,5 +34,41 @@ public class UsoController {
         UsoConsumibleResponseDTO response = usoService.registrarUsoConsumible(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @org.springframework.web.bind.annotation.GetMapping("/equipamiento")
+    public ResponseEntity<java.util.List<UsoEquipamientoResponseDTO>> obtenerUsosEquipamiento() {
+        return ResponseEntity.ok(usoService.obtenerUsosEquipamiento());
+    }
+
+    @org.springframework.web.bind.annotation.GetMapping("/consumible")
+    public ResponseEntity<java.util.List<UsoConsumibleResponseDTO>> obtenerUsosConsumible() {
+        return ResponseEntity.ok(usoService.obtenerUsosConsumible());
+    }
+
+    @org.springframework.web.bind.annotation.PutMapping("/equipamiento/{id}")
+    public ResponseEntity<UsoEquipamientoResponseDTO> editarUsoEquipamiento(
+            @org.springframework.web.bind.annotation.PathVariable Long id,
+            @Valid @RequestBody UsoEquipamientoRequestDTO request) {
+        return ResponseEntity.ok(usoService.editarUsoEquipamiento(id, request));
+    }
+
+    @org.springframework.web.bind.annotation.PutMapping("/consumible/{id}")
+    public ResponseEntity<UsoConsumibleResponseDTO> editarUsoConsumible(
+            @org.springframework.web.bind.annotation.PathVariable Long id,
+            @Valid @RequestBody UsoConsumibleRequestDTO request) {
+        return ResponseEntity.ok(usoService.editarUsoConsumible(id, request));
+    }
+
+    @org.springframework.web.bind.annotation.DeleteMapping("/equipamiento/{id}")
+    public ResponseEntity<Void> eliminarUsoEquipamiento(@org.springframework.web.bind.annotation.PathVariable Long id) {
+        usoService.eliminarUsoEquipamiento(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @org.springframework.web.bind.annotation.DeleteMapping("/consumible/{id}")
+    public ResponseEntity<Void> eliminarUsoConsumible(@org.springframework.web.bind.annotation.PathVariable Long id) {
+        usoService.eliminarUsoConsumible(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

@@ -5,11 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record UsoEquipamientoRequestDTO(
-    @NotNull(message = "El ID del investigador es obligatorio")
-    Long investigadorId,
 
     @NotNull(message = "El ID del equipamiento es obligatorio")
     Long equipamientoId,
+
+    @NotBlank(message = "El nombre del investigador es obligatorio")
+    @Size(max = 150, message = "El nombre no puede superar los 150 caracteres")
+    String nombreInvestigador,
 
     @NotBlank(message = "El tipo de investigación es obligatorio")
     @Size(max = 100, message = "El tipo no puede superar los 100 caracteres")

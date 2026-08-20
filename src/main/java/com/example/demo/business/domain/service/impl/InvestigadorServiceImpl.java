@@ -68,8 +68,8 @@ public class InvestigadorServiceImpl implements InvestigadorService {
         Investigador inv = investigadorRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Investigador no encontrado con id: " + id));
 
-        boolean tieneUsos = usoEquipamientoRepository.existsByInvestigadorId(id) ||
-                            usoConsumibleRepository.existsByInvestigadorId(id);
+        boolean tieneUsos = usoEquipamientoRepository.existsByUsuarioUsername(inv.getDni()) ||
+                            usoConsumibleRepository.existsByUsuarioUsername(inv.getDni());
 
         if (tieneUsos) {
             inv.setActivo(false);

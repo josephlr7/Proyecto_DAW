@@ -21,9 +21,6 @@ public record PersonalLaboratorioRequestDTO(
     @Size(max = 20, message = "El género no puede superar los 20 caracteres")
     String genero,
 
-    @Size(max = 100, message = "El número de resolución no puede superar los 100 caracteres")
-    String resolucionNumero,
-
     @NotBlank(message = "El cargo es obligatorio")
     @Size(max = 50, message = "El cargo no puede superar los 50 caracteres")
     String cargo,
@@ -44,12 +41,6 @@ public record PersonalLaboratorioRequestDTO(
     @Size(max = 50, message = "La condición no puede superar los 50 caracteres")
     String condicion,
 
-    @NotBlank(message = "La categoría es obligatoria")
-    @Size(max = 50, message = "La categoría no puede superar los 50 caracteres")
-    String categoria,
-
-    Long laboratorioId,
-
-    PerfilPersonalDTO perfil
+    Long laboratorioId
 ) {}
 

@@ -11,6 +11,7 @@ public record UsoEquipamientoResponseDTO(
     String equipamientoNombre,
     String tipoInvestigacion,
     String actividadNombre,
+    String nombreInvestigador,
     Double horasUso,
     LocalDate fecha,
     LocalTime hora,

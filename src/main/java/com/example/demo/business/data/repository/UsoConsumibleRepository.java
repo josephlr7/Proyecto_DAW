@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsoConsumibleRepository extends JpaRepository<UsoConsumible, Long> {
-    boolean existsByInvestigadorId(Long id);
+    boolean existsByUsuarioUsername(String username);
 }
 
